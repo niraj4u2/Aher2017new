@@ -64,7 +64,7 @@ $(function(){
 			}*/
 			
 			var page =getpagename();
-			var Skip_Page = ["login.html","register.html" ]; 
+			var Skip_Page = ["login.html","register.html","forgot.html" ]; 
 			//check login if not page is login
 			if(jQuery.inArray(page, Skip_Page )<0){
 				 LocalDb.CheckDb();
@@ -78,31 +78,43 @@ $(function(){
 				//	LocalDb.LoadBookGroomHeader(book_id);
 				}
 			}
-			 $('.loginForm').submit(function(){
-				 // clear error msg data 
+			if(page =='profile_update.html'){
+				 LocalDb.UserProfile();
+				
+			}
+			if(page =='qrdetail.html'){
+				alert();
+			}
+			$('#appsearch').keyup(function(){
+			var searchField = $(this).val();
+			alert(searchField + 'searching in process');
+			});
+			$('#Fogotpassword').submit(function(){
+			 // clear error msg data 
 				LocalDb.resetErrors();
+				$('#loginbutton').prop('disabled', true); 
 				$('#loader').css('display','block'); 
 				var data = $(this).serializeArray();
 				var formData = $(this);
 				var status = 0;
 				$.ajax({
-					url:BaseUrl+"user_login",
+					url:SiteUrl+"forgot_verify",
 					async: false,
 					data: data,
 					dataType:'json', 
 					type:'post',
 					success: function(data) {
 						if(data.status==1){
-							if(data.content.user_data != ""){
-								LocalDb.iniDataBase(data.content);						
-								$('#loader').css('display','none'); 
-								$('#flash_message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You have been successfully logged in.</div>');
-								window.location.href = "index.html";
-							}else{
-								$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Server down</div>');
-							}
+							$('#loginbutton').html('Loading..');
+							 	
+							$('#loader').css('display','none'); 
+							$('#flash_message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You have been successfully reset password . Please check you email </div>');
+							 return false;
+							 
 							
 						}else if(data.status==0){
+							$('#loginbutton').prop('disabled', false); 
+				
 							if(jQuery.type(data.message)=='string'){
 								$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+data.message+'</div>');
 							}else{
@@ -124,20 +136,72 @@ $(function(){
 			}
 
 		});
-		 
+		$('#loginbutton').html('Login');
+		$('#loginbutton').prop('disabled', false);  
 	   return false;
+	});
+			$('#loginForm').submit(function(){
 				 
-				 
-				 
-				 
-			 });
+				 // clear error msg data 
+				LocalDb.resetErrors();
+				$('#loginbutton').prop('disabled', true); 
+				$('#loader').css('display','block'); 
+				var data = $(this).serializeArray();
+				var formData = $(this);
+				var status = 0;
+				$.ajax({
+					url:BaseUrl+"user_login",
+					async: false,
+					data: data,
+					dataType:'json', 
+					type:'post',
+					success: function(data) {
+						if(data.status==1){
+							$('#loginbutton').html('Loading..');
+							if(data.content.user_data != ""){
+								LocalDb.iniDataBase(data.content);						
+								$('#loader').css('display','none'); 
+								$('#flash_message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You have been successfully logged in.</div>');
+								window.location.href = "index.html";
+							}else{
+								$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Server down</div>');
+							}
+							
+						}else if(data.status==0){
+							$('#loginbutton').prop('disabled', false); 
+				
+							if(jQuery.type(data.message)=='string'){
+								$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+data.message+'</div>');
+							}else{
+								$.each(data.message,function(field_name,msg){
+									var msg_data = '<label class="error" for="'+field_name+'">'+msg+'</label>';
+									$('input[name="' + field_name + '"], select[name="' + field_name + '"]').addClass('inputTxtError').after(msg_data);
+						
+								});	
+							}
+								$('#loader').css('display','none'); 
+						}else{
+								$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Server down</div>');
+								$('#loader').css('display','none');
+							} 
+			   
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert('status code: '+jqXHR.status+'errorThrown: ' + errorThrown + 'jqXHR.responseText:'+jqXHR.responseText );
+			}
+
+		});
+		$('#loginbutton').html('Login');
+		$('#loginbutton').prop('disabled', false);  
+	   return false;
+	});
 			   // change user book event
 			   
 			   // this code is used for index.html/qrcode
 				$('#MyAherBook').on('change', function(e){ 
-				$("#Aher_Sur_Name").html('<option value="">Select Sur Name</option>');
-				$("#MyAherBookVillage").html('<option value="">Select Village</option>');
-				$("#MyAherBookuserSurname").html('<option value="">Select Name</option>');
+				//$("#Aher_Sur_Name").html('<option value="">Select Sur Name</option>');
+			//	$("#MyAherBookVillage").html('<option value="">Select Village</option>');
+			//	$("#MyAherBookuserSurname").html('<option value="">Select Name</option>');
 				$('#Couple_name').html('');
 				$('#date').html('');
 				LocalDb.LoadVillage($(this).val());
@@ -145,13 +209,13 @@ $(function(){
 			
 			// load surname according to 
 			 $('#MyAherBookVillage').on('change', function(e){ 
-				$("#Aher_Sur_Name").html('<option value="">Select Sur Name</option>');
-				$("#MyAherBookuserSurname").html('<option value="">Select Name</option>');
+				//$("#Aher_Sur_Name").html('<option value="">Select Sur Name</option>');
+				//$("#MyAherBookuserSurname").html('<option value="">Select Name</option>');
 				LocalDb.Loadsurname($(this).val());
 			});
 			// load book usernameusername
 			$('#Aher_Sur_Name').on('change', function(e){ 
-				$("#MyAherBookuserSurname").html('<option value="">Select Name</option>');
+				//$("#MyAherBookuserSurname").html('<option value="">Select Name</option>');
 				var village_name =$('#MyAherBookVillage').val();
 				LocalDb.LoadBookUserName($(this).val(),village_name);
 			});
@@ -199,6 +263,22 @@ $(function(){
 			if(localUserData.image){
 				$( ".left_profile" ).append('<img class="ra-avatar img-responsive" src="'+localUserData.image+'" >');
 			}
+		},
+		UserProfile: function () {
+			var localUserData = JSON.parse(localStorage["user_data"]);
+			
+			$('#title option[value="'+localUserData.title+'"]')
+			$( "#middle_name" ).val(localUserData.middle_name);
+			//$("#title select").val(localUserData.title);
+			$('#title').val(localUserData.title);
+			$( "#phone" ).val(localUserData.phone);
+			$( "#first_name" ).val(localUserData.first_name);
+			$( "#last_name" ).val(localUserData.last_name);
+			$( "#address" ).val(localUserData.address);
+			$( "#comment" ).val(localUserData.comment);
+			$( "#user_name" ).val(localUserData.user_name);
+			$( "#email" ).val(localUserData.email);
+		 
 		},
 		LoadAdvt: function () {
 			var ads_class = [ "move-left", "selected", "move-right"];
@@ -248,7 +328,7 @@ $(function(){
 
 		},
 		LoadVillage: function (book_id=null) {	
-			$("#MyAherBookVillage").html('<option value ="" >Select Village</option>');
+			//$("#MyAherBookVillage").html('<option value ="" >Select Village</option>');
 			$("#MyAherBookVillage").css('display','block');
 			if(book_id){
 				 // change profile image 
@@ -265,13 +345,21 @@ $(function(){
 				if(villages){
 					 var SortedVillage = $.unique(villages.sort()).sort();
 					 $.each(SortedVillage, function(index, village) {
-						 $("#MyAherBookVillage").append('<option value="'+village+'">'+village+'</option>');
+						 
+						 if(index==0){
+							  $("#MyAherBookVillage").html('<option value="'+village+'">'+village+'</option>');
+							LocalDb.Loadsurname(village);
+						 }else{
+							  $("#MyAherBookVillage").append('<option value="'+village+'">'+village+'</option>');
+						 }
+						 
+						
 					 })
 				}
 			}
 		},
 		Loadsurname: function (village_name=null) {
-			$("#Aher_Sur_Name").html('<option value ="" >Select Sur Name</option>');
+			//$("#Aher_Sur_Name").html('<option value ="" >Select Sur Name</option>');
 			$("#Aher_Sur_Name").css('display','block');
 			if(village_name){
 				var sur_names = [];
@@ -284,13 +372,21 @@ $(function(){
 				if(sur_names){
 					 var SortedSurName = $.unique(sur_names.sort()).sort();
 					 $.each(SortedSurName, function(index, sur_name) {
-						 $("#Aher_Sur_Name").append('<option value="'+sur_name+'">'+sur_name+'</option>');
+						 if(index==0){
+							$("#Aher_Sur_Name").html('<option value="'+sur_name+'">'+sur_name+'</option>');
+						 	var village_name =$('#MyAherBookVillage').val();
+						    LocalDb.LoadBookUserName(sur_name,village_name);
+						 }else{
+								$("#Aher_Sur_Name").append('<option value="'+sur_name+'">'+sur_name+'</option>');
+						 }
+						 
+						 
 					 })
 				}
 			}
 		},
 		LoadBookUserName: function (sur_name = null,village_name = null) {
-			$("#MyAherBookuserSurname").html('<option value ="" >Select Name</option>');
+			//$("#MyAherBookuserSurname").html('<option value ="" >Select Name</option>');
 			$("#MyAherBookuserSurname").css('display','block');
 			if(sur_name){
 				var user_names = [];
@@ -303,7 +399,13 @@ $(function(){
 				if(user_names){
 					 var SortedUserName = $.unique(user_names.sort()).sort();
 					 $.each(SortedUserName, function(index, username) {
-						 $("#MyAherBookuserSurname").append('<option value="'+username+'">'+username+'</option>');
+						 if(index==0){
+							  
+							 $("#MyAherBookuserSurname").html('<option value="'+username+'">'+username+'</option>');
+						 }else{
+							 $("#MyAherBookuserSurname").append('<option value="'+username+'">'+username+'</option>');
+						 }
+						 
 					 })
 				}
 			}

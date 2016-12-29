@@ -33,10 +33,10 @@
     "ID_RESOLUTION_WXGA",
     "ID_RESOLUTION_HD720P"
   ],
-  "BundleVersion": "1.0.3",
-  "DisplayName": "Barcode demo",
+  "BundleVersion": "2.0.3",
+  "DisplayName": "AherApp",
   "Author": "Telerik",
-  "Description": "BarcodeScanner-DemoApp",
+  "Description": "Aherapp",
   "WP8Capabilities": [
     "ID_CAP_IDENTITY_DEVICE",
     "ID_CAP_NETWORKING",

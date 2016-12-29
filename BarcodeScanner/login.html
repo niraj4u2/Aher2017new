@@ -171,7 +171,7 @@
 <p class="mt0 mr0 ml0 mb20">Fill up the below form to get access to our App</p>
 <span class="error" id="flash_message"></span>
 <div id="loader"  style="display:none;" class="loading"></div>
-<form class="loginForm">
+<form  class="loginForm" id="loginForm">
         <ul class="fieldlist">
             <li>
 			<span class="inputRow">
@@ -182,8 +182,9 @@
             <li>
 			<span class="inputRow">
 			<i class="fa fa-lock"></i>
-            <input id="password" name="password" type="password" class="k-textbox" placeholder="Password" />
-			</span>	
+				<input id="password" name="password" type="password" class="k-textbox" placeholder="Password" />
+			</span>
+				<a href="forgot.html" data-align="right" class="registerBtn">Forgot Password? </a>	
             </li>
 			<li style="text-align:left;">
 			<input type="checkbox" id="eq1" class="k-checkbox" checked="checked">
@@ -193,6 +194,7 @@
 				<img id="loader" src="images/loader.gif" style="display:none">
 				<button  id="loginbutton" class="k-button k-primary">LOGIN</button>
 				<a href="register.html" class="registerBtn">Register User </a>
+				
             </li>
         </ul>
 		
