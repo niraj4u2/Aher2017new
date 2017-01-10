@@ -3,19 +3,63 @@ This js is used for store on localStorage
 */
 function getAbsolutePath() {
     var loc = window.location;
-    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
-    return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+    var base_url = loc.protocol + "//" +loc.host + "/" + loc.pathname.split('/')[1];
+    return base_url+'/';
+    
+   
 }
 function getpagename(){
 	var URL = window.location.pathname; // Gets page name
 	return URL.substring(URL.lastIndexOf('/') + 1); 
 }
+function GetUnique(inputArray)
+{
+	var outputArray = [];
+	for (var i = 0; i < inputArray.length; i++)
+	{
+		if ((jQuery.inArray(inputArray[i], outputArray)) == -1)
+		{
+			outputArray.push(inputArray[i]);
+		}
+	}
+	return outputArray.sort();
+}
+
+var ajax_call = function() {
+
+var user_books = JSON.parse(localStorage["user_book_record"]);
+	 for(var i=0; i<user_books.length; i++){
+		      if(user_books[i].app_status == 1){
+                var id =user_books[i].id;
+                 $.ajax({
+					url:BaseUrl+"save_userbook_check_status",
+					type: 'get',
+					data: {
+						user_book_id: user_books[i].id, 
+						checked: user_books[i].checked
+					  },
+					success: function(data) {
+						update_success_localbook(id,0);
+					},
+					 
+				})
+              }
+		}    
+  
+};
+
+/*var interval = 1000 * 60 * 1; // where X is your every X minutes
+setInterval(ajax_call, interval);
+*/
 function handleClick(cb){
 	if(cb.checked == true){
 		checked =1
 	}else{
 		checked =0
 	}
+	updatelocalbook(cb.value,checked);
+	 
+	 /*
 	 $.ajax({
 		url:BaseUrl+"save_userbook_check_status",
 		type: 'get',
@@ -31,7 +75,7 @@ function handleClick(cb){
 		    $('#'+cb.id).prop('checked', false);
 			alert('Please check your internet connection ');
 		}
-	});
+	});*/
 }
 
   $(document).ready(function(){
@@ -41,21 +85,40 @@ function handleClick(cb){
 	});
 		 
 		
-function updatelocalbook(id=null,checked=null){
+function update_success_localbook(id=null,app_status=0){
+	
 	var user_books = JSON.parse(localStorage["user_book_record"]);
 	 for(var i=0; i<user_books.length; i++){
 		      if(user_books[i].id == id){
-                user_books[i].check_status = checked;
+                user_books[i].app_status = 0;
+                
               }
             }     
 	localStorage["user_book_record"] = JSON.stringify(user_books);
 }
+function updatelocalbook(id=null,checked=null){
+	
+	var user_books = JSON.parse(localStorage["user_book_record"]);
+	 for(var i=0; i<user_books.length; i++){
+		      if(user_books[i].id == id){
+                user_books[i].check_status = checked;
+                user_books[i].app_status = 1;
+                
+              }
+            }     
+	localStorage["user_book_record"] = JSON.stringify(user_books);
+}
+ 
+
 $(function(){ 
 	$('#logout').on('click', function(){ 
 		clear: localStorage.clear(); 
 		window.location.href = getAbsolutePath()+"login.html";
 	});
-	 
+	/* $(".closemenu-link,#menu-content").click(function() {
+            $("#menu-content").data("kendoMobileDrawer").hide();
+            return false;
+        });*/
 	var LocalDb = {
 		
 		init: function () {
@@ -80,6 +143,18 @@ $(function(){
 			}
 			if(page =='profile_update.html'){
 				 LocalDb.UserProfile();
+				
+			}
+			if(page =='advt_details.html'){
+				var advt_id = LocalDb.getParameterByName('id');
+				LocalDb.Advt_detail(advt_id);
+				
+			}
+			if(page =='share-img.html'){
+				var book_id = LocalDb.getParameterByName('book_id');
+					var url =  SiteUrl+'show_qrcode/'+book_id;
+					$('#url').val(url);
+					//LocalDb.Advt_detail(advt_id);
 				
 			}
 			if(page =='qrdetail.html'){
@@ -156,6 +231,7 @@ $(function(){
 					dataType:'json', 
 					type:'post',
 					success: function(data) {
+						
 						if(data.status==1){
 							$('#loginbutton').html('Loading..');
 							if(data.content.user_data != ""){
@@ -228,14 +304,16 @@ $(function(){
 			localStorage["user_books"] = JSON.stringify(data.user_books);
 			localStorage["user_book_record"] = JSON.stringify(data.user_book_record);
 			localStorage["user_advt"] = JSON.stringify(data.user_advt);
-			
+			localStorage["update_adv_contact"] = JSON.stringify('');
+			//localStorage["update_user_book_record"] = JSON.stringify('');
 		},
-		CheckDb: function () {			
+		CheckDb: function () {	
+					
 			LocalDb.SetUserProfile();
 			LocalDb.LoadAdvt();
 			LocalDb.LoadBook();
 			var page =getpagename();
-			 
+			var interval = 1000 * 60 * 10;
 			if(page =='booklist.html'){
 				LocalDb.LoadBookByName();
 				var book_id = LocalDb.getParameterByName('book_id');
@@ -245,12 +323,12 @@ $(function(){
 				}
 			}
 			if(page =='qrdetail.html'){
-				 
 				var book_id = LocalDb.getParameterByName('book_id');
 				if(book_id){
 					LocalDb.LoadBookGroomHeader(book_id);
 				}
 			}
+			setInterval(ajax_call, interval);
 			
 			 
 		},
@@ -260,6 +338,11 @@ $(function(){
 			}
 			var localUserData = JSON.parse(localStorage["user_data"]);
 			$( "#profile_name" ).html('Hi, '+localUserData.first_name);
+			
+			$( "#name" ).val(localUserData.first_name);
+			$( "#phone" ).val(localUserData.phone);
+			$( "#user_id" ).val(localUserData.id);
+			
 			if(localUserData.image){
 				$( ".left_profile" ).append('<img class="ra-avatar img-responsive" src="'+localUserData.image+'" >');
 			}
@@ -278,6 +361,7 @@ $(function(){
 			$( "#comment" ).val(localUserData.comment);
 			$( "#user_name" ).val(localUserData.user_name);
 			$( "#email" ).val(localUserData.email);
+			
 		 
 		},
 		LoadAdvt: function () {
@@ -287,22 +371,35 @@ $(function(){
 			 $.each(localAdvtData, function(index, value ) {
 				var current_class =(ads_class[i])?ads_class[i] :'';
 				i++;
-				$( "#adsbanner" ).append('<li class="'+current_class+'"><section class="adsBox"><figure><img src="'+value.image+'" alt=""></figure><h4>'+value.advt_title+'</h4><p>'+value.advt_description+'</p><a href="advt_details.html?id='+value.id+'"><button class="k-button k-primary">READ MORE</button></a></section></li>' );
+				$( "#owl-demo" ).append('<div class="item"><div class="gallery-cell"><figure><img src="'+value.image+'" alt="Advertisement image" /></figure><h4>'+value.advt_title+'</h4><p>'+value.advt_description+'</p><section class="adsBox"><a href="advt_details.html?id='+value.id+'"><button class="k-button k-primary">READ MORE</button></a></section></div></div>');
+			  
 			});			 
+		},
+		Advt_detail: function (advt_id=null) {
+			var localAdvtData = JSON.parse(localStorage["user_advt"]);
+			$( "#advt_id" ).val(advt_id);
+			$("#myip").val(myip);
+			 var i =0; 
+			 $.each(localAdvtData, function(index, value ) {
+				if(value.id== advt_id){
+					 $( "#Advt-details-show" ).html('<img src="'+value['image']+'" height="300"  style="width:100%;">');
+				 }
+			 });			 
 		},
 		LoadBook: function () {
 			var localBookData = JSON.parse(localStorage["user_books"]);
 			$.each(localBookData, function(index, value ) {
 					$("#MyAherBook").append('<option value="'+value.id+'">'+value.book_name+'</option>');
+					$("#Userbooks").append('<option value="'+value.id+'">'+value.book_name+'</option>');
 				});
 
 		},
 		LoadBookprofile: function (book_id =null ) {
 			var localBookData = JSON.parse(localStorage["user_books"]);
-			 
 			$.each(localBookData, function(index, value ) {
 					if(value.id== book_id)
-					$( "#MyAherBookImage" ).html('<img class="ra-avatar img-responsive" src="'+value.couple_image+'" >');
+					$( "#MyAherBookImage" ).html('<img class="ra-avatar img-responsive" src="'+value.couple_image+'" ><label style="padding-top:18px;line-height:19px;display:block; padding-bottom:10px;">गावाचे नाव</label><label style="padding-top:18px;line-height:19px;display:block; padding-bottom:10px;">आडनाव</label><label style="padding-top:18px;line-height:19px;display:block; padding-bottom:10px;">संपूर्ण नाव</label>');
+				
 				}); 
 
 		},
@@ -311,7 +408,7 @@ $(function(){
 			$.each(localBookData, function(index, value ) {
 					if(value.id== book_id){
 						$( "#MyAherBookImage" ).html('<img class="ra-avatar img-responsive" src="'+value.couple_image+'" >');
-						$( "#MyAherBookImage" ).html('<img class="ra-avatar img-responsive" src="'+value.couple_image+'" >');
+						
 						$( "#date" ).html(' '+value.event_date_formate);
 						// $( "#time" ).html(' '+row['event_time']);
 						$( "#address" ).html(' '+value.home_address);
@@ -343,12 +440,12 @@ $(function(){
 					}
 				});
 				if(villages){
-					 var SortedVillage = $.unique(villages.sort()).sort();
-					 $.each(SortedVillage, function(index, village) {
+					 var villages = GetUnique(villages);
+					 $.each(villages, function(index, village) {
 						 
 						 if(index==0){
 							  $("#MyAherBookVillage").html('<option value="'+village+'">'+village+'</option>');
-							LocalDb.Loadsurname(village);
+								LocalDb.Loadsurname(village);
 						 }else{
 							  $("#MyAherBookVillage").append('<option value="'+village+'">'+village+'</option>');
 						 }
@@ -370,8 +467,8 @@ $(function(){
 					}
 				});
 				if(sur_names){
-					 var SortedSurName = $.unique(sur_names.sort()).sort();
-					 $.each(SortedSurName, function(index, sur_name) {
+					 var SortedSurName = GetUnique(sur_names);
+					$.each(SortedSurName, function(index, sur_name) {
 						 if(index==0){
 							$("#Aher_Sur_Name").html('<option value="'+sur_name+'">'+sur_name+'</option>');
 						 	var village_name =$('#MyAherBookVillage').val();
@@ -397,6 +494,8 @@ $(function(){
 					}
 				});
 				if(user_names){
+					 var SortedSurName = GetUnique(user_names);
+					
 					 var SortedUserName = $.unique(user_names.sort()).sort();
 					 $.each(SortedUserName, function(index, username) {
 						 if(index==0){

@@ -201,14 +201,6 @@ p{font-family: 'CANDARA' !important;}
     font-size: 4rem;
 }
 
-/*#total,
-.km-insetcontent .km-scroll-container > h2,
-.km-insetcontent .km-scroll-container > h3
-{
-    color: #4F576F;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
-}*/
-
 .about-button,
 #menu .item-list .km-button,
 #index .item-list .km-button
@@ -449,7 +441,6 @@ p{font-family: 'CANDARA' !important;}
     clip-path: url("images/iconmasks.svg#share");
 }
 
-
 /*Margin*/
 .ml0{margin-left:0 !important;}
 .ml10{margin-left:10px !important;}
@@ -584,32 +575,23 @@ background: url(../images/bg.jpg) no-repeat center center fixed;
   -o-background-size: cover;
   background-size: cover;
 }
-.pagebg{
-background: url(../images/pagebg.png) #fef5e7; background-size:100%; color:#535353; 
-}
+.pagebg{background: url(../images/pagebg.png) #fef5e7; background-size:100%; color:#535353; }
 .loginbg .logo_sec{text-align:center;}
 .loginbg .logo_sec img{max-width:170px; margin-bottom:10px;}
 .loginForm_sec{background:rgba(255,255,255, 0.8); padding:15px; margin:15px; text-align:center;
 border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px; box-shadow:0 0 15px #000;}
 
-.loginForm{}
 .loginForm .fieldlist{margin:0; padding:0;}
 .loginForm .fieldlist li{margin:0 0 15px 0; padding:0; list-style:none;}
 .loginForm .fieldlist li.last{text-align:left;}
 .loginForm .k-textbox{width:100%; border-radius:0; -moz-border-radius:0; -webkit-border-radius:0; -o-border-radius:0; -ms-border-radius:0;}
-
 .inputRow{display:block; position:relative;}
 .inputRow input{padding-left:35px; position:relative;}
 .inputRow i{position:absolute; left:0; top:0; z-index: 1; width:35px; height:2.694em; max-height:100%; line-height:2.694em; font-size:18px; background:#636363; color:#fff; font-size:16px;}
-
-.topbarLogo{}
 .topbarLogo img{max-width: 90px;}
 .km-root .k-toolbar, .km-navbar{min-height:50px;}
-
-.TopBarLink{}
 .TopBarLink .km-leftitem .km-button{text-align:left;}
 .TopBarLink .km-button{width:auto;}
-
 .user_profile,.s-button{background:#e55c00; color:#fff; border:0; border-radius: 0;}
 .user_profile .ra-avatar{border-radius:100%; -moz-border-radius:100%; -webkit-border-radius:100%; -o-border-radius:100%; -ms-border-radius:100%; border:10px solid rgba(255,255,255, 0.3);}
 .user_profile .ra-first-name{font-size:1.5rem;}
@@ -637,17 +619,14 @@ background: url(../images/userBanner.jpg) no-repeat center center;
 .wedSptr{max-width:100%; margin:5px 0;}
 .groome_name{text-align:left; font-size: 1.3rem; display:block;}
 .bride_name{text-align:right; font-size: 1.3rem; display:block;}
-.user_weddingBanner .botBar{background:rgba(255,255,255, 0.3); position:relative; z-index:5; color:yellow; 
+.user_weddingBanner .botBar{/* background:rgba(255,255,255, 0.3); */ position:relative; z-index:5; color:yellow; 
 /* margin:15px -19px -19px -19px; */ margin:15px -19px -19px -19px; text-align:center; padding:10px;}
 
 .aherCheck{text-align:center;}
 .aherCheck h3{text-transform:inherit;}
 .aherCheck .k-checkbox:checked + .k-checkbox-label:after, 
-.aherCheck .k-checkbox-label:after
-{color:#bebebe; height: 20px;
-    line-height: 20px;
-    width: 20px; border-radius:0; -moz-border-radius:0; -webkit-border-radius:0; -o-border-radius:0; -ms-border-radius:0;}
-	
+.aherCheck .k-checkbox-label:after{color:#bebebe; height: 20px;
+    line-height: 20px; width: 20px; border-radius:0; -moz-border-radius:0; -webkit-border-radius:0; -o-border-radius:0; -ms-border-radius:0;}
 .aherCheck .media-left, .aherCheck .media-body{text-align:left;}
 .aherCheck .media-left, .aherCheck .media-right{background:#fbfbfb;}
 .aherCheck .media-body{border-left:1px solid #e7e7e7; border-right:1px solid #e7e7e7;}
@@ -672,17 +651,13 @@ background: url(../images/userBanner.jpg) no-repeat center center;
 .media-right, .media > .pull-right {
     padding-left: 10px;
 }
-
 .whiteBox{background:#fff; padding:15px; box-shadow:5px 5px 5px rgba(0,0,0, 0.1);}
 .qrcodePart{}
 .qrcodePart .img-responsive{max-width:80px;}
 .qrcodePart h3{margin:0;}
-
-.aherBookPart{}
 .aherBookPart h3{margin:0;}
 .aherBookPart .img-responsive{max-width:80px;}
 .aherBookPart .media-body, .aherBookPart .media-left, .aherBookPart .media-right {vertical-align: top;}
-
 .k-block, .k-button, .k-textbox, .k-drag-clue, .k-touch-scrollbar, .k-window, .k-window-titleless .k-window-content, .k-window-action, .k-inline-block, .k-grid .k-filter-options, .k-grouping-header .k-group-indicator, .k-autocomplete, .k-multiselect, .k-combobox, .k-dropdown, .k-dropdown-wrap, .k-datepicker, .k-timepicker, .k-colorpicker, .k-datetimepicker, .k-notification, .k-numerictextbox, .k-picker-wrap, .k-numeric-wrap, .k-colorpicker, .k-list-container, .k-calendar-container, .k-calendar td, .k-calendar .k-link, .k-treeview .k-in, .k-editor-inline, .k-tooltip, .k-tile, .k-slider-track, .k-slider-selection, .k-upload{border-radius:0; -moz-border-radius:0; -webkit-border-radius:0; -o-border-radius:0; -ms-border-radius:0;}
 
 .km-root .km-popup .k-item, .km-widget.km-actionsheet > li{border-bottom:1px solid #fff;}
@@ -695,11 +670,7 @@ background: url(../images/userBanner.jpg) no-repeat center center;
     border: 7px solid rgba(255, 255, 255, 0.3); padding:7px; margin: 10px 0;
     border-radius: 100%; -moz-border-radius: 100%; -webkit-border-radius: 100%;
 }
-#menu-content .header_bar .img-responsive {
-    height: 110px;
-    max-width: inherit;
-    width: 110px;
-}
+#menu-content .header_bar .img-responsive { height: 110px;  max-width: inherit; width: 110px;}
 #menu-content .well{background:none; border:0; padding:15px;}
 #menu-content .media-body img{max-width:100%;}
 .closemenu-link{position:absolute; right:10px; top:5px; color:#fff !important; z-index:15;}
@@ -707,7 +678,7 @@ background: url(../images/userBanner.jpg) no-repeat center center;
 .scan-r{float:left;}
 #menuOverlay{position:absolute; top:0; height:100%; width:100%; background:#000; opacity:0; left:-100%;}
 #menuOverlay.show{opacity:1; left:69%;}
-#menuOverlay a{color:#fff;}
+#menuOverlay a,.groome_name.bok-lipt .span_groom_name{color:#fff;}
 #menu-content ul{margin:0; padding:0;}
 #menu-content ul li{margin:0 15px; padding:0; list-style:none;}
 #menu-content ul li a{color:#595959; display:block; border-bottom:1px solid #b2b2b2; padding:10px 15px;}
@@ -715,7 +686,7 @@ background: url(../images/userBanner.jpg) no-repeat center center;
 #menu-content ul li a i{margin-right:5px;}
 
 #menu-content{position:relative; z-index:15; overflow:visible !important;}
-#menu-content:before{background: rgba(0, 0, 0, 0.5) !important; width:1000px; height:100%; position:absolute; left:0; top:0; content:''; z-index:-14;}
+#menu-content:before{/* background: rgba(0, 0, 0, 0.5) !important; width:1000px; */ height:100%; position:absolute; left:0; top:0; content:''; z-index:-14;}
 #menu-content .km-content{background:#fff;}
 
 .searchShow{background:#fff; color:#787878; padding:2px 15px; display:block; position:absolute; left:0; top:50px; width:100%; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; 
@@ -736,29 +707,14 @@ box-shadow:none !important; -moz-box-shadow:none !important; -webkit-box-shadow:
 .date-box{background:#fcfcfc; padding:10px; max-width:640px;}
 .line-bg-img{text-align:center;}
 .line-bg-img h3{background:url(../images/head-line.png) center bottom no-repeat; padding-bottom:25px; margin-bottom:20px;}
-.searchBtn{width:auto;}
+.searchBtn{width:auto; display:none}
 .red-text{color:red;}
 .brown-text{color:#af2c14;}
-
 .hrSpace{background:url(../images/line-grd.png) center center no-repeat; height:1px; display:block; width:100%; margin:30px 0; border:0; background-size:100%;}
-
-.error {
-   color: #ff0000;
-   font-size: 12px;
-   margin-top: 5px;
-   margin-bottom: 0;
-}
-
+.error {color: #ff0000; font-size: 12px; margin-top: 5px; margin-bottom: 0;}
 .form-control{border-radius:0; -moz-border-radius:0; -webkit-border-radius:0;}
-
-.searchbox{
-    position:relative;
-    min-width:50px;
-    width:0%;
-    height:50px;
-    float:right;
-    overflow:hidden;
-    
+.searchbox{ position:relative; min-width:50px; width:0%; height:50px;
+    float:right; overflow:hidden;    
     -webkit-transition: width 0.3s;
     -moz-transition: width 0.3s;
     -ms-transition: width 0.3s;
@@ -766,19 +722,10 @@ box-shadow:none !important; -moz-box-shadow:none !important; -webkit-box-shadow:
     transition: width 0.3s;
 }
 
-.searchbox-input{
-    top:0;
-    right:0;
-    border:0;
-    outline:0;
-    background:#dcddd8;
-    width:100%;
-    height:40px;
-    margin:0;
+.searchbox-input{top:0;right:0;border:0; outline:0;  background:#dcddd8;
+    width:100%;height:40px; margin:0;
     padding:0px 55px 0px 20px;
-    font-size:20px;
-    color:red;
-}
+    font-size:20px;color:red;}
 .searchbox-input::-webkit-input-placeholder {
     color: #d74b4b;
 }
@@ -791,54 +738,92 @@ box-shadow:none !important; -moz-box-shadow:none !important; -webkit-box-shadow:
 .searchbox-input:-ms-input-placeholder {
     color: #d74b4b;
 }
+.searchbox-icon,.searchbox-submit{ width:50px;height:40px;display:block;position:absolute;  top:0;
+    font-family:verdana;font-size:22px; right:0;padding:0; margin:0;  border:0;  outline:0;
+    line-height:40px;  text-align:center;cursor:pointer;color:#dcddd8; background:#172b3c;}
+.searchbox-open{width:100%;}
 
-.searchbox-icon,
-.searchbox-submit{
-    width:50px;
-    height:40px;
-    display:block;
-    position:absolute;
-    top:0;
-    font-family:verdana;
-    font-size:22px;
-    right:0;
-    padding:0;
-    margin:0;
-    border:0;
-    outline:0;
-    line-height:40px;
-    text-align:center;
-    cursor:pointer;
-    color:#dcddd8;
-    background:#172b3c;
-}
-
-
-
-.searchbox-open{
-    width:100%;
-}
-
-.byline{
-  position:absolute;
-  top:150px;
-  left:30%;
-  text-align:center;
-  font-size:18px;
-}
-.byline a{
-  text-decoration:none;
-  color: #d74b4b;
-}
-
+.byline{position:absolute; top:150px; left:30%; text-align:center; font-size:18px;}
+.byline a{ text-decoration:none; color: #d74b4b;}
+.groome_name .span_groom_name,.bride_name .span_groom_name{border:none; opacity:0.6; color:#000; padding-left:5px;font-size:14px;}
 .registerBtn{margin-left:10px;}
 .scanPart label{font-weight:normal;}
-
+#MyAherBookImage li{list-style:none; }
 .TopBarLink i{font-size:24px !important;}
-
+.add-inner-box-space{margin-top:15px;}
+.media-left,.media-right{position:relative;}
+._imgshow{position:absolute;left:0px;top:0px;}
+._imgshow img{width:90px; height:90px; border-radius:110px;}
+.gallery-cell {background:#fcf9c3;width: 66%; padding-top:10px; text-align:center; margin-right: 10px; counter-increment: gallery-cell;
+}
+.media-left ._imgshow{left: 10px; top: 13px;}
+.media-right ._imgshow{left:20px; top: 14px;}
+.gallery-cell.is-selected{text-align:center;}
+.left_profile{position:relative;}
+.media-left .camera-icon{right:-11px}
+.media-right .camera-icon{bottom:-13px; right:-10px;}
+.camera-icon{background:url(../images/camera.png) center top no-repeat; width:48px; height:48px; display: block;
+    position: absolute; bottom: 0px; right: 0px;}
+.gallery-cell:before {display: block;text-align: center;line-height: 200px; font-size: 80px; color: white;}
+.left_profile .camera-icon{left:68px;z-index:10; cursor:pointer;}
+.left_profile ._imgshow {left: 10px; top: 10px;}
+.left_profile ._cssimg{z-index:11;}
+.groome_name.bok-lipt .span_groom_name{opacity:0.9;}
+#owl-demo .item .gallery-cell,#owl-demo .item img{width:100%;}
+#owl-demo .item img{width:98%;}
+#owl-demo .item{margin:10px;}
 
 /* ==============Media============= */
 @media screen and (max-width: 479px) {
     .user_weddingBanner .img-responsive{width:70px; height:70px;}
+	.user_profile .media-left ._imgshow,.user_profile .media-right ._imgshow {width:50px; height:50px; top:48px; }
 	.groome_name, .bride_name{font-size: 1.1rem;}
+	._imgshow img{border:0px;}
+	 .user_profile .media-left ._imgshow,.user_profile .media-right ._imgshow {width:50px; height:50px;}
+	 .user_profile .media-left ._imgshow{ top:31px;left:10px;}
+	 .user_profile .media-right ._imgshow{ top:31px;left:20px;}
+	 .user_profile .media-left ._cssimg{top:37px;}
+	 .user_profile .media-right ._cssimg{top:37px;}
+	 .user_profile .media-left ._imgshow img,.user_profile .media-right ._imgshow img{height:50px;}
+	 .user_profile .left_profile.media-left ._imgshow img{height:inherit;}
+	.user_profile .left_profile.media-left ._imgshow {width:100px; height:100px; top:5px; left:5px;}
+	.left_profile .camera-icon{bottom:27px;}
+	.left_profile.media-left .camera-icon{bottom:-18px;}
+ 
 }
+
+@media screen and (max-width:391px) {
+	.user_profile .media-left ._imgshow {top:31px;left: 10px;}
+	.user_profile .media-right ._imgshow {top:31px;left:20px;}
+	.user_profile .left_profile.media-left ._imgshow{top:auto;left:auto;margin-left: 5px;margin-top: 5px;}
+	.media-left .camera-icon{right:13px;}
+    .media-right .camera-icon{bottom:5px; right:-4px;}
+	.left_profile.media-left .camera-icon{bottom:-18px;}
+	
+}
+@media screen and (max-width:389px) {
+ .user_profile .media-right ._imgshow {top: 41px; left: 20px;}
+ .user_profile .media-left ._imgshow {top:41px;left: 10px;}
+}
+
+@media screen and (max-width:379px) {
+	.user_profile .media-left ._imgshow {top:50px;left: 10px;}
+	.user_profile .left_profile.media-left ._imgshow{top:auto;left:auto;}
+    .user_profile .media-right ._imgshow {top:50px;left:20px;}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

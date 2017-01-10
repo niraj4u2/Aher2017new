@@ -52,11 +52,46 @@
 <!-- End Template -->
 
 		<div data-role="view" data-layout="default" id="index" class="content-container">
-		<span class="error" id="flash_message"></span>
-		  <div id="Advt-details-show">
-		  </div>
-			  <form action="" method="post" id="advt-details-form">
-			  </form>
+		 <div id="Advt-details-show"></div>
+		  <span class="error" id="flash_message"></span>
+		 <form action="" method="POST" id="adv_details" role="form">
+						 <div class="panel-body">
+							<div class="row">
+								
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label>Name</label>
+										<input name="user_id"   type="hidden"   id="user_id">
+										<input name="myip"   type="hidden"   id="myip">
+										<input name="advt_id" tabindex="0" value="" type="hidden" class="form-control" id="advt_id">
+										<input name="name" id="name" required  tabindex="1" value="" class="form-control" placeholder="Enter your name ">
+									</div>
+									<div class="form-group">
+										<label>Mobile Number</label>
+										<input name="phone" id="phone" required  tabindex="2" value="" class="form-control" placeholder="phone">
+									</div>
+									
+									<div class="form-group">
+										<label>Message</label>
+										<textarea name="message" required id="message" tabindex="3"  class="form-control" placeholder="Enter Message Here"></textarea>
+									</div>
+									  
+								</div>
+								 
+								
+								<div class="col-lg-12">
+								<div class="form-group">
+									<div class="col-sm-4 col-sm-offset-2">
+										 <a href="index.html"class="k-button k-primary">Back</a>
+										 
+										<button class="k-button k-primary" type="submit">Submit</button>
+									</div>
+								</div>
+								</div>
+							
+							</div>
+						</div> 
+				 </form>
 		  
 		</div>
 <div id="menu-content" style="display:none;">
@@ -77,49 +112,13 @@
 				</div>
 			</div>
 			<ul>
-				<li>
-				<a  id="logout" href="javascript:void(0);">
-					<i class="fa fa-lock"></i> Logout
-						
-				</a>
-			</li>
-			<li>
-				<a href="index.html">
-					<i class="fa fa-home"></i> Home
-						
-				</a>
-			</li>
-			 
-			<li>
-				<a href="qrscan.html">
-					<i class="fa fa-qrcode"></i> QR Code
-						
-				</a>
-			</li>
-			<li>
-				<a href="qrcode.html">
-					<i class="fa fa-qrcode"></i> QR Code Generate
-						
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-bullhorn"></i> Advertise
-						
-				</a>
-			</li>
-			<li>
-				<a href="profile_update.html">
-					<i class="fa fa-user"></i> User Detail
-						
-				</a>
-			</li>
-			<li>
-				<a href="wedding.html">
-					<i class="fa fa-heart"></i> Wedding
-						
-				</a>
-			</li>
+				<li> <a  id="logout" href="javascript:void(0);"> <i class="fa fa-lock"></i> Logout </a> </li>
+				<li> <a href="index.html"> <i class="fa fa-home"></i> Home </a> </li>
+				 <li> <a href="qrcode_list.html"> <i class="fa fa-qrcode"></i> QR Code </a> </li>
+				 <li> <a href="qrcode.html"> <i class="fa fa-qrcode"></i> QR Code Generate </a></li>
+				 <li><a href="advertise.html"><i class="fa fa-bullhorn"></i> Advertise</a></li>
+				 <li><a href="profile_update.html"><i class="fa fa-user"></i> User Detail</a></li>
+				 <li><a href="change_password.html"><i class="fa fa-unlock-alt"></i> Change Password</a></li>
 			</ul>
 </div>
 
@@ -129,10 +128,12 @@
 <script src="js/modernizr.js"></script>
 <script src="js/jquery.cookie.js"></script>
 <script src="js/main.js"></script>
-<script src="js/localdb.js"></script>
 <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+<script src="js/localdb.js"></script>
+
 
 <script>
+ 
 $(function() {
         $("#menu-content").kendoMobileDrawer({
             container: ".content-container"
@@ -154,7 +155,55 @@ $(document).ready(function () {
 var app;
 app = new kendo.mobile.Application($(document.body), { transition: "slide" });
  
+ $('#adv_details').submit(function(){
+			var data = $(this).serializeArray();
+            var formData = $(this);
+            resetErrors();
+            var status = 0;
+            $.ajax({
+                url:BaseUrl+"sms",
+                async: false,
+				data: data,
+                dataType:'json', 
+                type:'post',
+                success: function(data) {
+                    if(data.status==1){
+						$('#flash_message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You have been successfully Submmited .</div>');
+						}else if(data.status==0){
+						if(jQuery.type(data.message)=='string'){
+							$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+data.message+'</div>');
+						}else{
+							$.each(data.message,function(field_name,msg){
+							var msg_data = '<label class="error" for="'+field_name+'">'+msg+'</label>';
+							$('input[name="' + field_name + '"], textarea[name="' + field_name + '"], select[name="' + field_name + '"]').addClass('inputTxtError').after(msg_data);
+							
+						});	
+					 }
+					} 
+                   
+                }, 
+                error: function(data) {
+					$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Please check your internet connection</div>');
+					 
+				},
+			   error: function (xhr, ajaxOptions, thrownError) {
+				alert(xhr.status);
+				alert(thrownError);
+				alert('error');
+			  }
+
+            });
+             
+           return false; 
+            
+        });
+ 
 });		
+function resetErrors() {
+	$('form input, form select').removeClass('inputTxtError');
+	$('#flash_message').html('');
+	$('label.error').remove();
+	}
 </script> 
 
 

@@ -219,18 +219,18 @@ app = new kendo.mobile.Application($(document.body), { transition: "slide" });
 
 		if (localStorage.chkbx && localStorage.chkbx != '') {
 			$('#eq1').attr('checked', 'checked');
-			$('#email').val(localStorage.usrname);
+			$('#username').val(localStorage.usrname);
 			$('#password').val(localStorage.pass);
 		} else {
 			$('#eq1').removeAttr('checked');
-			$('#email').val('');
+			$('#username').val('');
 			$('#password').val('');
 		}
 
 		$('#eq1').click(function() {
 			 if ($('#eq1').is(':checked')) {
 				// save username and password
-				localStorage.usrname = $('#email').val();
+				localStorage.usrname = $('#username').val();
 				localStorage.pass = $('#password').val();
 				localStorage.chkbx = $('#remember_me').val();
 			} else {

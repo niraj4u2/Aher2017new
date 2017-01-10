@@ -85,7 +85,7 @@
 <section class="p15">
  
 <div class="whiteBox aherBookPart">
-	<h3 class="ra-first-name">Shagun</h3>
+	<h3 class="ra-first-name"> लग्न </h3>
 		<div class="media">
 			<div class="media-left">
 				<a href="generateqr_form.html?type=1"><img  class="ra-avatar img-responsive" src="images/marriage.png"></a>
@@ -95,7 +95,8 @@
 		</div>
 	</div>
 <div class="whiteBox aherBookPart">
-	<h3 class="ra-first-name">BirthDay(Comming Soon)</h3>
+	<h3 class="ra-first-name">
+वाढदिवस (लवकरच येत आहे)</h3>
 		<div class="media">
 			<div class="media-left">
 				<a href="#"><img  class="ra-avatar img-responsive" src="images/birthday.png"></a>
@@ -127,49 +128,13 @@
 			</div>
 			
 			<ul>
-				<li>
-				<a  id="logout" href="javascript:void(0);">
-					<i class="fa fa-lock"></i> Logout
-						
-				</a>
-			</li>
-			<li>
-				<a href="index.html">
-					<i class="fa fa-home"></i> Home
-						
-				</a>
-			</li>
-			 
-			<li>
-				<a href="qrscan.html">
-					<i class="fa fa-qrcode"></i> QR Code
-						
-				</a>
-			</li>
-			<li>
-				<a href="qrcode.html">
-					<i class="fa fa-qrcode"></i> QR Code Generate
-						
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-bullhorn"></i> Advertise
-						
-				</a>
-			</li>
-			<li>
-				<a href="profile_update.html">
-					<i class="fa fa-user"></i> User Detail
-						
-				</a>
-			</li>
-			<li>
-				<a href="wedding.html">
-					<i class="fa fa-heart"></i> Wedding
-						
-				</a>
-			</li>
+				<li> <a  id="logout" href="javascript:void(0);"> <i class="fa fa-lock"></i> Logout </a> </li>
+				<li> <a href="index.html"> <i class="fa fa-home"></i> Home </a> </li>
+				 <li> <a href="qrcode_list.html"> <i class="fa fa-qrcode"></i> QR Code </a> </li>
+				 <li> <a href="qrcode.html"> <i class="fa fa-qrcode"></i> QR Code Generate </a></li>
+				 <li><a href="advertise.html"><i class="fa fa-bullhorn"></i> Advertise</a></li>
+				 <li><a href="profile_update.html"><i class="fa fa-user"></i> User Detail</a></li>
+				 <li><a href="change_password.html"><i class="fa fa-unlock-alt"></i> Change Password</a></li>
 			</ul>
 </div>
 
@@ -209,8 +174,15 @@ app = new kendo.mobile.Application($(document.body), { transition: "slide" });
       });
     }); 	
 </script> 
-
-
+<script src="js/loadimg.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+	$('.media-left #upload').loadImg({
+		"fileExt"		: ["png","jpg"],
+		"fileSize_min"	: 0,
+		"fileSize_max"	: 6
+	});
+  });
 </body>
 </html>
 

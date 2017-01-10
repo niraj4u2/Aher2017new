@@ -13,7 +13,9 @@
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/adsSlider.css">
- 
+<link rel="stylesheet" href="css/loadimg.css" type="text/css"> 
+
+
 <script src="js/jquery-1.9.1.min.js"></script>
 
 <script src="js/kendo.all.min.js"></script>
@@ -21,46 +23,30 @@
 <script src="js/jquery.cookie.js"></script>
 <script src="js/main.js"></script>
 <script src="js/localdb.js"></script>
- 
-
+<script src="js/bootstrap.js"></script>
+<script src="js/config.js"></script>
 </head>
 <body class="pagebg">
-<!-- <div data-role="layout" data-id="foo" data-platform="ios">
-    <div data-role="header">iOS App</div>
-</div>
-
-<div data-role="layout" data-id="foo" data-platform="android">
-    <div data-role="header">Android App</div>
-</div> -->
 
 <!-- Start Template -->
 <div data-role="layout" data-id="default">
 <header data-role="header">
 <div data-role="navbar" class="TopBarLink">
-<span data-role="view-title"></span>
-<a class="about-button km-widget km-button" data-align="left" href="#" id="menu-link">
-<i class="fa fa-bars"></i></a>
-<a class="about-button topbarLogo" data-align="left" href="#/" data-role="button">
-<!-- <img src="images/barlogo.png" alt=""/> -->आहेर Book
-</a>
-<a class="about-button searchBtn" data-align="right" href="#">
-<i class="fa fa-search"></i></a>
-<a class="about-button" data-align="right" href="index.html" data-role="button" data-rel="external">
-<i class="fa fa-home"></i></a>
+	<span data-role="view-title"></span>
+	<a class="about-button km-widget km-button" data-align="left" href="#" id="menu-link">
+	<i class="fa fa-bars"></i></a>
+	<a class="about-button topbarLogo" data-align="left" href="#/" data-role="button">
+	<!-- <img src="images/barlogo.png" alt=""/> -->आहेर Book
+	</a>
+	<a class="about-button searchBtn" data-align="right" href="#">
+	<i class="fa fa-search"></i></a>
+	<a class="about-button" data-align="right" href="index.html" data-role="button" data-rel="external">
+	<i class="fa fa-home"></i></a>
 </div>
-<section class="searchShow" style="display:none;">
-<input id="appsearch" type="text" class="k-textbox" placeholder="Search ....." style="width: 100%;" />
-</section>
+	<section class="searchShow" style="display:none;">
+	   <input id="appsearch" type="text" class="k-textbox" placeholder="Search ....." style="width: 100%;" />
+	</section>
 </header>
-
-
-
-<!-- <footer data-role="footer" data-id="default">
-<div data-role="tabstrip">
-<a href="#index" data-icon="home">Home</a>
-<a href="about.html" data-icon="organize" data-rel="external">About Us</a>
-</div>
-</footer> -->
 </div>
 <!-- End Template -->
 
@@ -70,53 +56,73 @@
 <section class="well user_profile user_weddingBanner mb0" id="profile">
 <div class="media">
 <div class="media-left">
+<i class="camera-icon">&nbsp;</i>
+    <label id="upload" class="groomimage">
+			<input type="file">
+    </label>
 <img class="ra-avatar img-responsive" id="groom_image" src="images/groom.jpg"></div>
 
 <div class="media-body">
 
-<span class="groome_name">Groom : <span class="span_groom_name">----</span></span>
+<span class="groome_name">वर : <input type="text" id="groom_name" name="groom_name" class="span_groom_name" placeholder="Type Groom Name" required /></span>
 <img class="wedSptr" src="images/weds_sptr.png">
-<div class="bride_name">Bride : <span class="span_bride_name">----</span></div>
+<div class="bride_name">वधू : <input id="bride_name" name="bride_name" type="text" class="span_groom_name" placeholder="Type Bride Name"required ></div>
 </div>
 
 <div class="media-right">
+<i class="camera-icon">&nbsp;</i>
+  <label id="upload" class="brideimage">
+			<input type="file">
+    </label>
 <img class="ra-avatar img-responsive" id="bride_image" src="images/bride.jpg"></div>
 </div>
-<div class="botBar"><i class="fa fa-calendar"></i><span id="date"> March 00, 0000  </span><span id="time"> </span></div>
+<div class="botBar">
+ </div>
+
+	<div id="example" style="width:279px; margin:9px auto;">
+            <div class="demo-section k-content">
+        <input id="event_date" name="event_date"  style="width: 100%" required />
+              
+                </p>
+            </div>
+       
+        </div>
+
 </section>
 </div>
                 
 </div>
-			
+<span class="error" id="flash_message"></span>
+ <form  type="post"  required method="post" onsubmit="return false;">			
 <section class="p15">
 
-<form id="qrcodeform" type="GET" name="book" action="share-img.html">
+
 	<div class="whiteBox aherBookPart">
 
 	<div class="media">
 	<div class="line-bg-img">
-	 <h3 class="ra-first-name"><span class="span_groom_name"></span> WEDS <span 
+	 <h3 class="ra-first-name"><span class="span_groom_name"></span>  लग्न  <span 
 	 class="span_bride_name"></span></h3>
 	 
 	 
 	<div class="add-inner-box" style="margin-top:30px;"> 
-	 <h4>Address</h4>
-	 <textarea type="text" name="address" class="k-textbox" id="" 
-		style="width:100%;" cols="4" rows="2"></textarea>
+	 <h4> घरचा पत्ता</h4>
+	 <textarea type="text" name="home_address" class="k-textbox" id="home_address" 
+		style="width:100%;" cols="4" rows="2" required ></textarea>
 	 </div>
 	 
 	
 	 
-	 <div class="add-inner-box"> 
-	 <h4>Venue</h4>
-	 <textarea type="text" name="venue_address" class="k-textbox" id="" 
-		style="width:100%;" cols="4" rows="2"></textarea>
+	 <div class="add-inner-box add-inner-box-space"> 
+	 <h4>विवाह स्थळ</h4>
+	 <textarea type="text" name="location_address" class="k-textbox" id="location_address" 
+		style="width:100%;" cols="4" rows="2" required ></textarea>
 	 </div>
 	
-	 <div class="add-inner-box"> 
-	 <h4>Message</h4>
-	 <textarea type="text" name="message" class="k-textbox" id="" 
-		style="width:100%;" cols="4" rows="2"></textarea>
+	 <div class="add-inner-box add-inner-box-space"> 
+	 <h4>टिप</h4>
+	 <textarea type="text" name="message" class="k-textbox" id="message" 
+		style="width:100%;" cols="4" rows="2" required ></textarea>
 	 </div>
 	
 	 
@@ -127,15 +133,13 @@
 	<div class="media" style="margin-top:30px;">
 	<div class="media-body">
 	<div class="form-group">
-		Book Name
-		 
-		<input type="text" name="book_name" style="width:100%;  class="k-textbox" id="book_name" value="" >
-	 
-			 
-
+		<h4>कार्यक्रम नाव</h4>
+		<input type="text" name="book_name" style="width:100%;"  class="k-textbox" id="book_name" value="" required >
+	
 		<span class="" style="width:100%; margin-top:30px; display:block;">
-		<textarea type="text" placeholder="Name" class="k-textbox" id="" 
-		style="width:100%;" cols="4" rows="2"></textarea>
+		<textarea type="text" placeholder="Name" class="k-textbox" 
+		id="add_people" 
+		style="width:100%;" cols="4" rows="2" ></textarea>
 		</span>
 		</div>
 		</div>
@@ -144,20 +148,18 @@
 
 	</div>
 
-	<button class="k-button k-primary" style="width:100%;">QR CODE GENERATE</button>
+	<button class="k-button k-primary" id="qrcodeform" style="width:100%;">QR CODE GENERATE</button>
 
 	</section>
 
 </form>
+ 
 
-<ul class="cd-gallery">
-<li>
-<ul class="cd-item-wrapper" id ="adsbanner"></ul>
-</li>
-</ul>
-
+ 
+</div>
 <div id="menu-content" style="display:none;">
-<a href="#" class="closemenu-link"><i class="fa fa-close"></i></a>
+
+<a href="javascript:void(0);" class="closemenu-link"><i class="fa fa-close"></i></a>
 <div class="header_bar">
 	<div class="col-lg-12 p0">
 		<section class="well mb0" id="profile">
@@ -170,85 +172,147 @@
 		</section>
 	</div>
 </div>
-
-<ul>
-				<li>
-				<a  id="logout" href="javascript:void(0);">
-					<i class="fa fa-lock"></i> Logout
-						
-				</a>
-			</li>
-			<li>
-				<a href="index.html">
-					<i class="fa fa-home"></i> Home
-						
-				</a>
-			</li>
-			 
-			<li>
-				<a href="qrscan.html">
-					<i class="fa fa-qrcode"></i> QR Code
-						
-				</a>
-			</li>
-			<li>
-				<a href="qrcode.html">
-					<i class="fa fa-qrcode"></i> QR Code Generate
-						
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-bullhorn"></i> Advertise
-						
-				</a>
-			</li>
-			<li>
-				<a href="profile_update.html">
-					<i class="fa fa-user"></i> User Detail
-						
-				</a>
-			</li>
-			<li>
-				<a href="wedding.html">
-					<i class="fa fa-heart"></i> Wedding
-						
-				</a>
-			</li>
+		    <ul>
+				<li> <a  id="logout" href="javascript:void(0);"> <i class="fa fa-lock"></i> Logout </a> </li>
+				<li> <a href="index.html"> <i class="fa fa-home"></i> Home </a> </li>
+				 <li> <a href="qrcode_list.html"> <i class="fa fa-qrcode"></i> QR Code </a> </li>
+				 <li> <a href="qrcode.html"> <i class="fa fa-qrcode"></i> QR Code Generate </a></li>
+				 <li><a href="advertise.html"><i class="fa fa-bullhorn"></i> Advertise</a></li>
+				 <li><a href="profile_update.html"><i class="fa fa-user"></i> User Detail</a></li>
+				 <li><a href="change_password.html"><i class="fa fa-unlock-alt"></i> Change Password</a></li>
 			</ul>
 
 </div>
 
-
-<script>
-	//var user_data  =$.parseJSON($.cookie("UserData")); 
-
-$(function() {
+<script src="js/loadimg.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+	$('.media-left #upload').loadImg({
+		"fileExt"		: ["png","jpg"],
+		"fileSize_min"	: 0,
+		"fileSize_max"	: 6
+	});
+	
+	$('.media-right #upload').loadImg({
+		"fileExt"		: ["png","jpg"],
+		"fileSize_min"	: 0,
+		"fileSize_max"	: 6
+	});
+	
+   });	
+   $(function() {
         $("#menu-content").kendoMobileDrawer({
             container: ".content-container"
         });
-
+		
         $("#menu-link").click(function() {
             $("#menu-content").data("kendoMobileDrawer").show();
-			//$('#menu-content').hide('slide', {direction: 'left'}, 1000);
+			$('#menu-content').hide('slide', {direction: 'left'}, 1000);
             return false;
         });
-
-        $(".closemenu-link").click(function() {
+				
+		$(".closemenu-link").click(function() {
             $("#menu-content").data("kendoMobileDrawer").hide();
             return false;
         });
-
+        
     });
-	
-$(document).ready(function () {
-var app;
-app = new kendo.mobile.Application($(document.body), { transition: "slide" });
-
-$("#MyAherBook").kendoDropDownList();
+	$(document).ready(function () {
+	var app;
+	app = new kendo.mobile.Application($(document.body), { transition: "slide" });
+	$("#MyAherBook").kendoDropDownList();
  
-});		
-</script> 
+                // create DatePicker from input HTML element
+			$("#event_date").kendoDateTimePicker();
+			$("#monthpicker").kendoDateTimePicker({
+				start: "year",
+				// defines when the calendar should return date
+				depth: "year",
+				// display month and year in the input
+				format: "MMMM yyyy"
+			});
+          
+          
+          $("form").submit(function(){
+			  resetErrors();
+			 var localUserData = JSON.parse(localStorage["user_data"]);	
+			  var groomimage = ($('.groomimage img').attr('src'));
+			  var brideimage = ($('.brideimage img').attr('src'));
+			  var message =  $('#message').val();
+			  var groom_name =  $('#groom_name').val();
+			  var bride_name =  $('#bride_name').val();
+			  var event_date =  $('#event_date').val();
+			  var home_address =  $('#home_address').val();
+			  var location_address =  $('#location_address').val();
+			  var book_name =  $('#book_name').val();
+			  var add_people =  $('#add_people').val();
+			  alert('a');
+			    $.ajax({
+				url:BaseUrl+"book_create",
+				type: 'post',
+				data: {
+					user_id: localUserData.id ,
+					groomimage: groomimage ,
+					brideimage: brideimage,
+					message: message,
+					groom_name: groom_name,
+					bride_name: bride_name,
+					event_date: event_date,
+					home_address: home_address,
+					location_address: location_address,
+					book_name: book_name,
+					add_people: add_people
+					
+				  },
+				  async: false,
+				  success: function(data) {
+					
+					if(data.status==1){
+							$('#loader').css('display','none'); 
+							$('#flash_message').html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Your event have been successfully created.</div>');
+							window.location.href = "share-img.html?book_id="+data.event_id;
+							return false;
+						
+						}else if(data.status==0){
+							 
+							if(jQuery.type(data.message)=='string'){
+								$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+data.message+'</div>');
+								
+							}else{
+								$.each(data.message,function(field_name,msg){
+									var msg_data = '<label class="error" for="'+field_name+'">'+msg+'</label>';
+									$('input[name="' + field_name + '"], select[name="' + field_name + '"]').addClass('inputTxtError').after(msg_data);
+						
+								});	
+							}
+								$('#loader').css('display','none'); 
+						}else{
+								$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Server down</div>');
+								$('#loader').css('display','none');
+							}  
+				},
+				 
+				error: function(data) {
+					
+					$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Please check your internet connection</div>');
+					 
+				},
+				 
+			});
+		return false;
+	});
+	
+	
+            
+   });
+   
+    function resetErrors() {
+		$('form input, form select').removeClass('inputTxtError');
+		$('#flash_message').html('');
+		$('label.error').remove();
+	}
+</script>
+
 </body>
 </html>
 

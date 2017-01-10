@@ -293,7 +293,10 @@ app = new kendo.mobile.Application($(document.body), { transition: "slide" });
 						});	
 					 }
 					}
-				}
+				},error: function(data) {
+					$('#flash_message').html('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Please check your internet connection</div>');
+					 
+				},
 			});
         return false;
        });
